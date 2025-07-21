@@ -1,6 +1,6 @@
-# Persian Birthday Wheel Picker
+# Persian Wheel Picker
 
-A fully typesafe, accessible **Jalali (Persian) date-of-birth picker** built with React, TailwindCSS, and Day.js + Jalaliday. It provides three synchronized scroll wheels (year / month / day) with smooth inertial scrolling, snapping, and an optional _centered_ (classic iOS‑style) wheel UX.
+A fully typesafe, accessible **Jalali (Persian) date picker** built with React, TailwindCSS, and Day.js + Jalaliday. It provides three synchronized scroll wheels (year / month / day) with smooth inertial scrolling, snapping, and an optional _centered_ (classic iOS‑style) wheel UX.
 
 > **Goal:** Publish this component to the **shadcn/ui registry** or reuse it locally as a standalone package.
 
@@ -35,11 +35,11 @@ declare module "jalaliday";
 ## 🛠 Usage
 
 ```tsx
-import PersianBirthdayWheelPicker from "@/components/PersianBirthdayWheelPicker"; // adjust path
+import PersianWheelPicker from "@/components/PersianWheelPicker"; // adjust path
 
 export default function Example() {
   return (
-    <PersianBirthdayWheelPicker
+    <PersianWheelPicker
       centered
       visibleRows={5}
       initialJalaliDate="1379-10-05"
@@ -67,16 +67,16 @@ export default function Example() {
 
 To submit this component to the shadcn registry:
 
-1. **Create a folder** under `components/` (e.g. `components/persian-birthday-wheel-picker`).
+1. **Create a folder** under `components/` (e.g. `components/persian-wheel-picker`).
 2. Split the file if desired (e.g. `wheel.tsx` + `index.tsx`).
 3. Export a `component.json` describing the entry point:
 
    ```json
    {
-     "name": "persian-birthday-wheel-picker",
-     "description": "Jalali birthday picker with snapping wheels.",
+     "name": "persian-wheel-picker",
+     "description": "Jalali date picker with snapping wheels.",
      "dependencies": ["dayjs", "jalaliday"],
-     "files": ["./PersianBirthdayWheelPicker.tsx"],
+     "files": ["./PersianWheelPicker.tsx"],
      "registryDependencies": [],
      "type": "components:ui"
    }

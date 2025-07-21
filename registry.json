@@ -6,16 +6,11 @@
   "homepage": "https://acme.com",
   "items": [
     {
-      "name": "wheel-calender",
+      "name": "persian-wheel-picker",
       "type": "registry:component",
-      "title": "Wheel Calender",
+      "title": "Persian Wheel Picker",
       "description": "A wheel calender to select birthday.",
-      "files": [
-        {
-          "path": "registry/default/ui/button.tsx",
-          "type": "registry:ui"
-        }
-      ]
+      "files": []
     }
   ]
 }
