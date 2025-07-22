@@ -1,75 +1,80 @@
 # Persian Wheel Picker
 
-A fully typesafe, accessible **Jalali (Persian) date picker** built with React, TailwindCSS, and Day.js + Jalaliday. It provides three synchronized scroll wheels (year / month / day) with smooth inertial scrolling, snapping, and an optional _centered_ (classic iOS‑style) wheel UX.
+A fully type‑safe, accessible **Jalali (Persian) date picker** built with React, TailwindCSS, and Day.js + Jalaliday. It renders three synchronized scroll wheels (year / month / day) with smooth inertial scrolling, snapping, and an optional centered (classic iOS‑style) wheel UX.
 
-> **Goal:** Publish this component to the **shadcn/ui registry** or reuse it locally as a standalone package.
+---
 
-## ✨ Features
-
-- 🇮🇷 **Jalali calendar** support via `dayjs` + `jalaliday`.
-- 🎯 **Snapping wheel UX** – always lands on a valid value, even with fast flicks.
-- 🧮 **Leap year + Esfand handling** (correct days per month).
-- 🔁 **Debounced change events** to avoid re-renders spam.
-- ♿ **Accessible**: proper `listbox` / `option` roles and ARIA attributes.
-- 🎨 **TailwindCSS friendly** – minimal styling, easy to theme.
-- 🧩 **Centering mode** with highlight lines or linear mode without spacers.
-- 🧪 **TypeScript** first; no `any` leaks.
-
-## 📦 Installation
+### 🚀 Quick Start
 
 ```bash
-npm install
+# Install via shadcn CLI
+bunx --bun shadcn@latest add https://code.nikode.ir/r/persian-wheel-picker.json
 # or
-pnpm install
+pnpm dlx shadcn@latest add https://code.nikode.ir/r/persian-wheel-picker.json
 # or
-bun install
+npx shadcn@latest add https://code.nikode.ir/r/persian-wheel-picker.json
 ```
-
-Add a TypeScript declaration if your setup complains about `jalaliday`:
-
-```ts
-// types/jalaliday.d.ts
-declare module "jalaliday";
-```
-
-## 🛠 Usage
 
 ```tsx
-import PersianWheelPicker from "@/components/PersianWheelPicker"; // adjust path
+import PersianWheelPicker from "@/components/PersianWheelPicker";
 
 export default function Example() {
   return (
     <PersianWheelPicker
-      centered
-      visibleRows={5}
+      centered       // ← Recommended for best UX
+      visibleRows={5} // ← Use 5 rows for optimal readout
       initialJalaliDate="1379-10-05"
-      onChange={(val) => {
-        console.log("Jalali:", val.jalali, "Gregorian:", val.gregorian);
-      }}
+      onChange={({ jalali, gregorian }) =>
+        console.log("Jalali:", jalali, "Gregorian:", gregorian)
+      }
     />
   );
 }
 ```
 
-### Props
+---
 
-| Prop                | Type                                                     | Default               | Description                                                      |
-| ------------------- | -------------------------------------------------------- | --------------------- | ---------------------------------------------------------------- |
-| `minYear`           | `number`                                                 | `1300`                | Smallest selectable Jalali year.                                 |
-| `maxYear`           | `number`                                                 | `current Jalali year` | Largest selectable Jalali year (use to enforce age).             |
-| `initialJalaliDate` | `string`                                                 | `today (Jalali)`      | Initial date in `YYYY-MM-DD`. Invalid values fall back to today. |
-| `onChange`          | `(value: { jalali: string; gregorian: string }) => void` | `undefined`           | Called (debounced) when user selects a new date.                 |
-| `className`         | `string`                                                 | `""`                  | Extra wrapper classes.                                           |
-| `visibleRows`       | `number`                                                 | `5`                   | Only in `centered` mode – must be an odd number ≥3.              |
-| `centered`          | `boolean`                                                | `false`               | Enables iOS‑style centered wheel with guide lines.               |
+### ✨ Key Features
 
-## 🧩 Publishing to shadcn/ui Registry
+* **🇮🇷 Jalali support** via `dayjs` + `jalaliday`
+* **Snapping wheels** that always land on a valid value
+* **Leap‑year & Esfand logic**: correct month lengths
+* **Debounced `onChange`** to minimize render churn
+* **Accessible** (`role="listbox"` / `option`, `aria-activedescendant`)
+* **Tailwind‑friendly**: unopinionated styling, easy theming
+* **iOS‑style centered mode** with highlight lines
+* **TypeScript‑first**: zero `any` leaks
 
-To submit this component to the shadcn registry:
+---
 
-1. **Create a folder** under `components/` (e.g. `components/persian-wheel-picker`).
-2. Split the file if desired (e.g. `wheel.tsx` + `index.tsx`).
-3. Export a `component.json` describing the entry point:
+### ⭐️ Why **centered** + **5 rows**?
+
+* **Centered mode** places your selection in the visual “sweet spot,” making it clear which date is picked.
+* **5 visible rows** balances context (two above/below) with compactness—ideal for both mobile and desktop.
+
+---
+
+### 📦 Props
+
+| Prop                | Type                                                   | Default             | Description                                    |
+| ------------------- | ------------------------------------------------------ | ------------------- | ---------------------------------------------- |
+| `minYear`           | `number`                                               | `1300`              | Minimum Jalali year                            |
+| `maxYear`           | `number`                                               | *current Jalali*    | Maximum Jalali year (e.g. enforce age limits)  |
+| `initialJalaliDate` | `string`                                               | *today*             | `"YYYY-MM-DD"`; falls back to today if invalid |
+| `onChange`          | `(val: { jalali: string; gregorian: string }) => void` | `undefined`         | Debounced selection callback                   |
+| `centered`          | `boolean`                                              | `false`             | iOS‑style centered wheel with guide lines      |
+| `visibleRows`       | `number`                                               | `5` (when centered) | Odd number ≥3 of visible items                 |
+| `className`         | `string`                                               | `""`                | Extra wrapper CSS classes                      |
+
+---
+
+### 🛠️ Publishing to shadcn/ui
+
+1. Create `components/persian-wheel-picker/`
+
+2. Add your `.tsx` files (e.g. `PersianWheelPicker.tsx`)
+
+3. Include a `component.json`:
 
    ```json
    {
@@ -77,42 +82,31 @@ To submit this component to the shadcn registry:
      "description": "Jalali date picker with snapping wheels.",
      "dependencies": ["dayjs", "jalaliday"],
      "files": ["./PersianWheelPicker.tsx"],
-     "registryDependencies": [],
      "type": "components:ui"
    }
    ```
 
-4. Run the shadcn CLI to publish (or open a PR to the upstream registry repo).
-
-> See the official docs: [https://ui.shadcn.com/docs/registry](https://ui.shadcn.com/docs/registry)
-
-## 🧠 Implementation Notes
-
-- Scrolling uses `requestAnimationFrame` to sync intermediate value changes.
-- A timeout (120ms) schedules final snapping after the user stops.
-- External `value` changes (through state lifting) will smoothly scroll into place if not currently scrolling.
-- Leap years handled automatically by `dayjs().daysInMonth()` in Jalali context.
-
-## 🖌 Styling
-
-The component ships with minimal Tailwind classes. Override or extend via the `className` prop or global styles. The highlight lines in `centered` mode can be customized (e.g., replace `border-y` with your own gradients).
-
-## ♿ Accessibility
-
-- Each wheel uses `role="listbox"` and each item uses `role="option"`.
-- Active option is identified by `aria-activedescendant`.
-- Keyboard support can be added easily (e.g. handle `onKeyDown` to move focus). PRs welcome.
-
-## ✅ Testing Suggestions
-
-- Rapid scroll with mouse wheel or touchpad → ensure final snap occurs.
-- Switch months around Esfand on leap / non‑leap years.
-- Supply `initialJalaliDate` near boundaries (e.g., `1300-01-01`).
-
-## 📄 License
-
-MIT – feel free to use in commercial or open‑source projects.
+4. Run `npx shadcn@latest add ./components/persian-wheel-picker` or open a PR to the registry.
 
 ---
 
-Enjoy! If you publish it to the registry, drop a link so others can use it too. 🙌
+### 🧩 Implementation Notes
+
+* **Smooth scrolling** via `requestAnimationFrame`; snaps after 120 ms idle
+* **External updates** (prop changes) animate into place if idle
+* **Leap‑year** and month‑length from `dayjs().daysInMonth()` in Jalali mode
+
+---
+
+### 🎨 Theming & Styling
+
+* Minimal Tailwind classes—override via `className` or global CSS
+* Customize highlight lines in centered mode (e.g. replace `border-y`)
+
+---
+
+### ♿ Accessibility
+
+* `role="listbox"` on each wheel
+* `role="option"` + `aria-activedescendant` for the active item
+* Easily extensible to keyboard support (`onKeyDown`, arrow navigation)
