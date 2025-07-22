@@ -1,18 +1,18 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "author": "Alireza Nikzad",
-  "dependencies": ["dayjs", "jalaliday"],
   "name": "acme",
   "homepage": "https://acme.com",
   "items": [
     {
-      "name": "wheel-calender",
+      "dependencies": ["dayjs", "jalaliday"],
+      "name": "persian-wheel-picker",
       "type": "registry:component",
-      "title": "Wheel Calender",
-      "description": "A wheel calender to select birthday.",
+      "title": "Persian Wheel Calender",
+      "description": "A Persian wheel Date picker.",
       "files": [
         {
-          "path": "registry/default/persian-wheel-calender.tsx",
+          "path": "registry/default/persian-wheel-picker.tsx",
           "type": "registry:component"
         }
       ]

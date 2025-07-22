@@ -1,4 +1,4 @@
-import PersianWheelCalender from "@/components/persian-wheel-calender";
+import PersianWheelPicker from "@/components/persian-wheel-picker";
 import * as React from "react";
 
 // This page displays items from the custom registry.
@@ -7,7 +7,7 @@ import * as React from "react";
 export default function Home() {
   return (
     <div className="grid place-items-center h-dvh w-full">
-      <PersianWheelCalender
+      <PersianWheelPicker
         initialJalaliDate="1379-10-05"
         centered
         className="border w-fit !max-w-full"
