@@ -250,7 +250,7 @@ export const Wheel: React.FC<WheelProps> = ({
 
   return (
     <div
-      className="relative flex flex-col items-stretch w-28"
+      className="relative flex flex-col items-stretch w-full max-w-28"
       aria-label={ariaLabel}
     >
       <div
