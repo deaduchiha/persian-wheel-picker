@@ -15,6 +15,23 @@ A fully typesafe, accessible **Jalali (Persian) date picker** built with React, 
 - 🧩 **Centering mode** with highlight lines or linear mode without spacers.
 - 🧪 **TypeScript** first; no `any` leaks.
 
+## 📦 Installation
+
+```bash
+npm install
+# or
+pnpm install
+# or
+bun install
+```
+
+Add a TypeScript declaration if your setup complains about `jalaliday`:
+
+```ts
+// types/jalaliday.d.ts
+declare module "jalaliday";
+```
+
 ## 🛠 Usage
 
 ```tsx
